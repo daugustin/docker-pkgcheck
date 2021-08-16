@@ -2,6 +2,8 @@ name: Build Image
 
 on:
   push:
+  schedule:
+    - cron: '1 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,5 +12,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
       - name: Build image
         run: ./make_image.sh
