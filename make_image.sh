@@ -16,7 +16,7 @@ buildcmd emerge --quiet-build -q dev-util/pkgcheck
 buildcmd bash -c 'source /etc/portage/make.conf && rm "${DISTDIR}"/*'
 buildcmd echo 'FEATURES="-ipc-sandbox -network-sandbox"' \| tee -a /etc/portage/make.conf
 
-buildah config --entrypoint "/usr/bin/pkgcheck" "${c}"
+buildah config --entrypoint '["/usr/bin/pkgcheck"]' "${c}"
 buildah config --workingdir "/repo" "${c}"
 
 buildah commit --format=docker --squash --rm "${c}" "ghcr.io/${GITHUB_REPOSITORY_OWNER}/pkgcheck:latest"
