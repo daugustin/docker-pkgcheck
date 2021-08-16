@@ -1,0 +1,14 @@
+name: Build Image
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  buildah:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build image
+        run: ./make_image.sh
