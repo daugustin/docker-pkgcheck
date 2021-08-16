@@ -1,0 +1,7 @@
+name: 'PkgCheck'
+description: Runs PkgCheck
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/daugustin/pkgcheck:latest'
+  args:
+    - 'scan'
