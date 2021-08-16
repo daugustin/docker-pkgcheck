@@ -14,7 +14,6 @@ buildcmd mkdir -p /repo
 buildcmd emerge --quiet-build -q dev-util/pkgcheck
 # shellcheck disable=SC2016
 buildcmd bash -c 'source /etc/portage/make.conf && rm "${DISTDIR}"/*'
-buildcmd rm /etc/portage/make.profile
 # shellcheck disable=SC2016
 buildah run -v "${MOUNT_POINT}":/mnt "${c}" -- bash -c 'source /etc/portage/make.conf && cp -a /mnt/profiles "${PORTDIR}"'
 buildcmd echo 'FEATURES="-ipc-sandbox -network-sandbox"' \| tee -a /etc/portage/make.conf
