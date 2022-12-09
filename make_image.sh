@@ -14,7 +14,7 @@ c=$(buildah from gentoo/stage3)
 # Get DISTDIR and PORTDIR from container
 stage3_container=$(podman run -d gentoo/stage3)
 podman cp "${stage3_container}":/usr/share/portage/config/repos.conf /tmp
-DISTDIR=$(buildah run -- bash -c ". /usr/share/portage/config/make.globals; echo \$DISTDIR")
+DISTDIR=$(buildah run "${c}" -- bash -c ". /usr/share/portage/config/make.globals; echo \$DISTDIR")
 PORTDIR=$(./read-portdir.py /tmp/repos.conf)
 echo "Using DISTDIR=${DISTDIR}"
 echo "Using PORTDIR=${PORTDIR}"
