@@ -22,7 +22,7 @@ buildcmd mkdir -p /repo
 buildcmd emerge --quiet-build -q dev-util/pkgcheck
 buildcmd bash -c "rm -v \"${DISTDIR}\"/*"
 # shellcheck disable=SC2016
-buildah run -v "${MOUNT_POINT}":/mnt "${c}" -- bash -c 'source /etc/portage/make.conf && cp -a /mnt/. "${PORTDIR}"'
+buildah run -v "${MOUNT_POINT}":/mnt "${c}" -- bash -c "cp -a /mnt/. \"${PORTDIR}\""
 buildcmd echo 'FEATURES="-ipc-sandbox -network-sandbox"' \| tee -a /etc/portage/make.conf
 
 buildah config --entrypoint '["/usr/bin/pkgcheck"]' "${c}"
