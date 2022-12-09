@@ -2,7 +2,7 @@
 set -ex
 
 buildcmd() {
-  buildah run -v "${MOUNT_POINT}":/var/db/repos/gentoo --network host "${c}" -- "$@"
+  buildah run -v "${MOUNT_POINT}":"${PORTDIR}" --network host "${c}" -- "$@"
 }
 
 podman run -d gentoo/portage
