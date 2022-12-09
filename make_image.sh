@@ -8,7 +8,6 @@ buildcmd() {
 podman run -d gentoo/portage
 VOLUME_ID="$(podman volume list | tail -n1 | awk '{print $2}')"
 MOUNT_POINT="$(podman volume inspect $VOLUME_ID | jq -r '.[].Mountpoint')"
-c=$(buildah from gentoo/stage3)
 
 # Get DISTDIR and PORTDIR from container
 stage3_container=$(podman run -d gentoo/stage3)
@@ -18,6 +17,7 @@ PORTDIR=$(./read-portdir.py /tmp/repos.conf)
 echo "Using DISTDIR=${DISTDIR}"
 echo "Using PORTDIR=${PORTDIR}"
 
+c=$(buildah from gentoo/stage3)
 buildcmd mkdir -p /repo
 buildcmd emerge --quiet-build -q dev-util/pkgcheck
 buildcmd bash -c "rm -v \"${DISTDIR}\"/*"
