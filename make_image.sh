@@ -30,4 +30,4 @@ buildah config --entrypoint '["/usr/bin/pkgcheck"]' "${c}"
 buildah config --workingdir "/repo" "${c}"
 
 buildah commit --format=docker --squash --rm "${c}" "ghcr.io/${GITHUB_REPOSITORY_OWNER}/pkgcheck:latest"
-# buildah push "ghcr.io/${GITHUB_REPOSITORY_OWNER}/pkgcheck:latest"
+buildah push "ghcr.io/${GITHUB_REPOSITORY_OWNER}/pkgcheck:latest"
